@@ -29,7 +29,7 @@ int main()
     manager.PushScreen(&main_screen);
     manager.EnableCBF(true);
     manager.ForceUpdate();
-
+    
     while (1)
     {
         // This is actually not ran constantly as the ST7789
