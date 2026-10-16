@@ -38,33 +38,36 @@ ST7789::ST7789(const Vec2i32& dimensions, uint8_t din_pin, uint8_t clk_pin, uint
 
 void ST7789::UpdateDisplay()
 {
-    ChooseDevice();
+    // no operation
 }
 
 void ST7789::Power(bool power_on)
 {
-    ChooseDevice();
+    Select();
     if (power_on)
         st7789_cmd(0x28, nullptr, 0);
     else
         st7789_cmd(0x29, nullptr, 0);
+    Deselect();
 }
 
 void ST7789::SetBrightness(uint8_t brightness)
 {
-    ChooseDevice();
+    Select();
     pwm_brightness.SetDutyCycle((float)brightness / 255.f);
+    Deselect();
 }
 
 void ST7789::ClearDisplay()
 {
-    ChooseDevice();
+    Select();
     st7789_fill(0);
+    Deselect();
 }
 
 void ST7789::InvertColors()
 {
-    ChooseDevice();
+    Select();
     static bool inverted = false;
     if (inverted)
         st7789_cmd(0x20, nullptr, 0);
@@ -72,32 +75,33 @@ void ST7789::InvertColors()
         st7789_cmd(0x21, nullptr, 0);
 
     inverted = !inverted;
+    Deselect();
 }
 
 void ST7789::DrawPixel(Vec2i32 pos, RGBA color)
 {
-    ChooseDevice();
+    Select();
     st7789_set_cursor(pos.x, pos.y);
     st7789_put(color.ToRGB565());
+    Deselect();
 }
 
 void ST7789::DrawPixel(int32_t x, int32_t y, RGBA color)
 {
-    ChooseDevice();
+    Select();
     st7789_set_cursor(x, y);
     st7789_put(color.ToRGB565());
+    Deselect();
 }
 
 RGBA ST7789::GetPixel(Vec2i32 pos) const
 {
-    ChooseDevice();
     // unsupported
     return 0;
 }
 
 RGBA ST7789::GetPixel(int32_t x, int32_t y) const
 {
-    ChooseDevice();
     // unsupported
     return 0;
 }
