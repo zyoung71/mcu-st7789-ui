@@ -1,6 +1,6 @@
-[submodule "lib/pico-interactive-ui"]
-	path = lib/pico-interactive-ui
-	url = https://github.com/zyoung71/pico-interactive-ui
-[submodule "lib/pico-st7789"]
-	path = lib/pico-st7789
-	url = https://github.com/zyoung71/st7789-library-for-pico
+[submodule "lib/mcu-interactive-ui"]
+	path = lib/mcu-interactive-ui
+	url = https://github.com/zyoung71/mcu-interactive-ui
+[submodule "lib/mcu-platform"]
+	path = lib/mcu-platform
+	url = https://github.com/zyoung71/mcu-platform

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 # Set VSCode Workspace Folder.
-set(VSCODE_WORKSPACE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
+set(VSCODE_WORKSPACE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 
 # Using C17 and C++20 by default.
 set(CMAKE_C_STANDARD 17)
@@ -44,21 +44,23 @@ else()
 endif()
 
 # Change the first argument with your project name!
-project(pico-st7789-ui-impl C CXX ASM)
+project(mcu-st7789-ui-impl-rp2040 C CXX ASM)
 
 pico_sdk_init()
 
-add_subdirectory(../ build)
+add_subdirectory(../../ build/mcu-st7789-ui)
+add_subdirectory(../../lib/mcu-platform/platforms/rp2040 build/mcu-platform-rp2040)
 
 add_executable(${CMAKE_PROJECT_NAME} src/main.cpp)
-
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     include
 )
 
-target_link_libraries(${CMAKE_PROJECT_NAME}
-    pico-st7789-ui
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
+    mcu-st7789-ui
+    mcu-platform-rp2040
+    pico_stdlib
 )
 
 pico_enable_stdio_usb(${CMAKE_PROJECT_NAME} 1)

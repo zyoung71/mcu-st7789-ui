@@ -1,20 +1,19 @@
-if (NOT TARGET pico-st7789-ui)
+if (NOT TARGET mcu-st7789-ui)
 
-    add_library(pico-st7789-ui STATIC
+    add_library(mcu-st7789-ui STATIC
         src/display/ST7789.cpp
-        lib/pico-st7789/src/st7789.c
     )
 
-    target_include_directories(pico-st7789-ui PUBLIC
+    target_include_directories(mcu-st7789-ui PUBLIC
         include
-        lib/pico-st7789/src/include
     )
 
-    add_subdirectory(lib/pico-interactive-ui)
+    add_subdirectory(lib/mcu-interactive-ui)
+    add_subdirectory(lib/mcu-platform)
 
-    target_link_libraries(pico-st7789-ui
-        pico-interactive-ui
-        hardware_spi
+    target_link_libraries(mcu-st7789-ui
+        mcu-platform-interface
+        mcu-interactive-ui
     )
     
 endif()
